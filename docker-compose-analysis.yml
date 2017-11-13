@@ -8,8 +8,7 @@ nginx:
   links:
     - web:probr_core
     - websocket:probr_core_ws
-  external_links:
-    - probranalysis_analysis_1:probr_analysis
+    - analysis:probr_analysis
 
 # probr-core, django app
 web:
@@ -39,6 +38,8 @@ worker:
    links:
      - postgres:postgres
      - redis:redis
+     - mongodb:mongodb
+     - influxdb:influxdb
 
 # database container
 postgres:
@@ -92,3 +93,23 @@ dataprobr:
   volumes:
     - ./media:/app/media
     - ./static:/app/static
+
+analysis:
+  image: probr/analysis:latest
+  environment:
+    NODE_ENV: production
+  command: node dist/server/app.js
+  ports:
+    - "8080:8080"
+  links:
+    - redis:redis
+    - mongodb:mongodb
+
+analysis_worker:
+  image: probr/analysis:latest
+  environment:
+    NODE_ENV: production
+  command: node dist/worker/app.js
+  links:
+    - redis:redis
+    - mongodb:mongodb

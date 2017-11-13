@@ -88,6 +88,13 @@ DATABASES = {
 
 MONGO_URI = 'mongodb://localhost/probr_core'
 
+# InfluxDB Configuration
+INFLUX_HOST = os.environ.get('INFLUXDB_PORT_8086_TCP_ADDR', 'localhost'),
+INFLUX_PORT = os.environ.get('INFLUXDB_PORT_8086_TCP_PORT', '8086'),
+INFLUX_USER = os.environ.get('INFLUXDB_USER', 'root'),
+INFLUX_PW = os.environ.get('INFLUXDB_PW', 'root'),
+INFLUX_DB_NAME = os.environ.get('INFLUXDB_NAME', 'probr'),
+
 # Celery settings
 BROKER_URL = 'redis://localhost:6379/'
 
