@@ -5,7 +5,7 @@ import importlib
 from celery import shared_task
 
 from captures.models import Capture
-from probr.settings import PROBR_HANDLERS, STORE_CAPTURES
+from probr.base_settings import PROBR_HANDLERS, STORE_CAPTURES
 
 def recursiveImport(full_class_string):
     """

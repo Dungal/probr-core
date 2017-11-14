@@ -96,7 +96,7 @@ INFLUX_PW = os.environ.get('INFLUXDB_PW', 'root'),
 INFLUX_DB_NAME = os.environ.get('INFLUXDB_NAME', 'probr'),
 
 # Celery settings
-BROKER_URL = 'redis://localhost:6379/'
+BROKER_URL = 'redis://' + os.environ.get('REDIS_PORT_6379_TCP_ADDR', 'localhost') + ':' + os.environ.get('REDIS_PORT_6379_TCP_PORT', '6379')
 
 # Redis Connection for Sockets
 WS4REDIS_CONNECTION = {
